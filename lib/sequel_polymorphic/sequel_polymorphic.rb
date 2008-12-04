@@ -3,6 +3,7 @@ module Sequel
     module Polymorphic
       # Apply the plugin to the model.
       def self.apply(model, options = {})
+        raise "You must pass in an options hash!" if options.blank?
         plural_model = model.to_s.downcase.pluralize
         singular_model = model.to_s.downcase.singularize
         if as_variable = (options[:belongs_to] or options[:many_to_one])

@@ -9,4 +9,12 @@ describe Sequel::Plugins::Polymorphic do
       end
     end.should raise_error
   end
+
+  it "should raise an error if you call 'is :polymorphic' without any args" do
+    lambda do
+      class Blowup < Sequel::Model
+        is :polymorphic
+      end
+    end.should raise_error
+  end
 end
