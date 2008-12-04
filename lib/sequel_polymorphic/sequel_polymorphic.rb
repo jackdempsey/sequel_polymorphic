@@ -27,7 +27,8 @@ module Sequel
               self[:#{as_variable}_type] = (#{as_variable}.class.name if #{as_variable})
             end
             }
-        elsif (one_to_many_variable = (options[:one_to_many] or options[:has_many])) && (as_variable = options[:as])
+        elsif one_to_many_variable = (options[:one_to_many] or options[:has_many])
+          raise "You must pass in an :as key-value pair!" unless as_variable = options[:as]
           singular_one_to_many_variable = one_to_many_variable.to_s.singularize
           model.class_eval %{
             associate(:one_to_many, :#{one_to_many_variable}, :key=>:#{as_variable}_id) do |ds|
