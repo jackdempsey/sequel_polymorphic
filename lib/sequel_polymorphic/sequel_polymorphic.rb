@@ -54,11 +54,11 @@ module Sequel
           options ||= {}
           many_class = many_of_class.to_s.singularize
           if able = options[:as]
+            associate(:one_to_many, many_of_class, :key=>"#{able}_id".to_sym) do |ds|
+              ds.filter("#{able}_type".to_sym=>self.to_s)
+            end
+
              method_definitions = %{
-               associate(:one_to_many, :#{many_of_class}, :key=>:#{able}_id) do |ds|
-                 ds.filter(:#{able}_type=>'#{self}')
-               end
-           
                private
            
                def _add_#{many_class}(#{many_class})
@@ -92,7 +92,7 @@ module Sequel
             through_klass = through.to_s.singularize.capitalize # => Tagging
             associate(:many_to_many, many_to_class,
                       :left_key => "#{able}_id".to_sym,
-                      :join_table => through) { |ds| ds.filter("#{able}_type".to_sym=>self.class.to_s) }
+                      :join_table => through) { |ds| ds.filter("#{able}_type".to_sym=>self.to_s) }
 
             method_string = %{
               private
