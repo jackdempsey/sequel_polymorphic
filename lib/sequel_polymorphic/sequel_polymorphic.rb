@@ -50,11 +50,12 @@ module Sequel
         alias :belongs_to :many_to_one
 
         def one_to_many(*args, &block)
-          one_to_many_variable, options = *args
-          many_class = one_to_many_variable.to_s.singularize
+          many_of_class, options = *args
+          options ||= {}
+          many_class = many_of_class.to_s.singularize
           if able = options[:as]
              method_definitions = %{
-               associate(:one_to_many, :#{one_to_many_variable}, :key=>:#{able}_id) do |ds|
+               associate(:one_to_many, :#{many_of_class}, :key=>:#{able}_id) do |ds|
                  ds.filter(:#{able}_type=>'#{self}')
                end
            
@@ -70,7 +71,7 @@ module Sequel
                  #{many_class}.#{able}_type = nil
                  #{many_class}.save
                end
-               def _remove_all_#{one_to_many_variable}
+               def _remove_all_#{many_of_class}
                  #{many_class.capitalize}.filter(:#{able}_id=>pk, :#{able}_type=>'#{self}').update(:#{able}_id=>nil, :#{able}_type=>nil)
                end
              }
@@ -82,6 +83,18 @@ module Sequel
         
         alias :has_many :one_to_many
         
+        def many_to_many(*args, &block)
+          many_to_class, options = *args
+          options ||= {}
+          if through = options[:through] and able = options[:as]
+            #many_to_many :tags, :through => :taggings, :as => :taggable
+            associate(:many_to_many, many_to_class,
+                      :left_key => "#{able}_id".to_sym,
+                      :join_table => through) { |ds| ds.filter("#{able}_type".to_sym=>self.class.to_s) }
+          else
+            associate(:many_to_many, *args, &block)
+          end
+        end
       end # ClassMethods
     end # Polymorphic
   end # Plugins
