@@ -12,6 +12,7 @@ module Sequel
       module ClassMethods
         def many_to_one(*args, &block)
           able, options = *args
+          options ||= {}
           if options[:polymorphic]
             model = self.class.to_s.downcase
             plural_model = model.pluralize
@@ -52,7 +53,7 @@ module Sequel
           one_to_many_variable, options = *args
           many_class = one_to_many_variable.to_s.singularize
           if able = options[:as]
-             self.class_eval %{
+             method_definitions = %{
                associate(:one_to_many, :#{one_to_many_variable}, :key=>:#{able}_id) do |ds|
                  ds.filter(:#{able}_type=>'#{self}')
                end
@@ -73,6 +74,7 @@ module Sequel
                  #{many_class.capitalize}.filter(:#{able}_id=>pk, :#{able}_type=>'#{self}').update(:#{able}_id=>nil, :#{able}_type=>nil)
                end
              }
+             self.class_eval method_definitions
           else
             associate(:one_to_many, *args, &block)
           end
