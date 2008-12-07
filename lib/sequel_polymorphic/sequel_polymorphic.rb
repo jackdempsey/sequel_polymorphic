@@ -83,14 +83,33 @@ module Sequel
         
         alias :has_many :one_to_many
         
+        #example:   many_to_many :tags, :through => :taggings, :as => :taggable
         def many_to_many(*args, &block)
-          many_to_class, options = *args
+          many_to_class, options = *args # => :tags, :through => :taggings, :as => :taggable
+          many_class = many_to_class.to_s.singularize # => tag
           options ||= {}
           if through = options[:through] and able = options[:as]
-            #many_to_many :tags, :through => :taggings, :as => :taggable
+            through_klass = through.to_s.singularize.capitalize # => Tagging
             associate(:many_to_many, many_to_class,
                       :left_key => "#{able}_id".to_sym,
                       :join_table => through) { |ds| ds.filter("#{able}_type".to_sym=>self.class.to_s) }
+
+            method_string = %{
+              private
+
+              def _add_#{many_class}(#{many_class})
+                #{through_klass}.create(:#{many_class}_id => #{many_class}.pk, :#{able}_id => pk, :#{able}_type => '#{self}')
+              end
+
+              def _remove_#{many_class}(#{many_class})
+                #{through_klass}.filter(:#{many_class}_id => #{many_class}.pk, :#{able}_id => pk, :#{able}_type => '#{self}').delete
+              end
+
+              def _remove_all_#{many_to_class}
+                #{through_klass}.filter(:#{able}_id=>pk, :#{able}_type=>'#{self}').delete
+              end
+            }
+            self.class_eval method_string
           else
             associate(:many_to_many, *args, &block)
           end
