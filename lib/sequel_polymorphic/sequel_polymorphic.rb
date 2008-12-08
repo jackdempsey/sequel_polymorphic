@@ -55,7 +55,7 @@ module Sequel
           many_class = many_of_class.to_s.singularize
           if able = options[:as]
             associate(:one_to_many, many_of_class, :key=>"#{able}_id".to_sym) do |ds|
-              ds.filter("#{able}_type".to_sym=>self.to_s)
+              ds.filter("#{able}_type".to_sym => self.class.to_s)
             end
 
              method_definitions = %{
@@ -88,11 +88,12 @@ module Sequel
           many_to_class, options = *args # => :tags, :through => :taggings, :as => :taggable
           many_class = many_to_class.to_s.singularize # => tag
           options ||= {}
-          if through = options[:through] and able = options[:as]
+          if through = (options[:through] or options[:join_table]) and able = options[:as]
             through_klass = through.to_s.singularize.capitalize # => Tagging
+            # self in the block passed to associate is an instance of the class, hence the self.class call
             associate(:many_to_many, many_to_class,
                       :left_key => "#{able}_id".to_sym,
-                      :join_table => through) { |ds| ds.filter("#{able}_type".to_sym=>self.to_s) }
+                      :join_table => through) { |ds| ds.filter("#{able}_type".to_sym => self.class.to_s) }
 
             method_string = %{
               private
