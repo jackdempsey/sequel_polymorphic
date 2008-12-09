@@ -8,7 +8,8 @@ class Asset < Sequel::Model
     varchar :attachable_type
   end
   
-  is :polymorphic, :belongs_to => :attachable
+  is :polymorphic
+  belongs_to :attachable, :polymorphic => true
   
 end
 
@@ -18,8 +19,8 @@ class Post < Sequel::Model
     varchar :name
   end
 
-  is :polymorphic, :has_many => :assets, :as => :attachable
-
+  is :polymorphic
+  has_many :assets, :as => :attachable
 end
 
 
@@ -29,8 +30,8 @@ class Note < Sequel::Model
     varchar :name
   end
 
-  is :polymorphic, :has_many => :assets, :as => :attachable
-
+  is :polymorphic
+  has_many :assets, :as => :attachable
 end
 
 [Asset, Post, Note].each {|klass| klass.create_table!}
