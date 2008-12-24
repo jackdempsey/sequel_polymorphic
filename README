@@ -106,7 +106,13 @@ end
 Thats quite a bit of code. With sequel_polymorphic you can now do:
 
 class Note < Sequel::Model
-  is :polymorphic, :as => :attachable
+  is :polymorphic
+  one_to_many :assets, :as => :attachable
+end
+
+class Asset < Sequel::Model
+  is :polymorphic
+  many_to_one :attachable, :polymorphic => true
 end
 
 voila!
