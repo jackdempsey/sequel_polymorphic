@@ -7,11 +7,11 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jack Dempsey"]
   s.autorequire = %q{sequel_polymorphic}
-  s.date = %q{2008-12-08}
+  s.date = %q{2009-01-20}
   s.description = %q{A gem that provides Sequel::Models with polymorphic association capabilities}
   s.email = %q{jack.dempsey@gmail.com}
   s.extra_rdoc_files = ["README", "LICENSE", "TODO"]
-  s.files = ["LICENSE", "README", "Rakefile", "TODO", "lib/sequel_polymorphic", "lib/sequel_polymorphic/sequel_polymorphic.rb", "lib/sequel_polymorphic.rb", "spec/sequel-setup.rb", "spec/sequel_polymorphic", "spec/sequel_polymorphic/sequel_polymorphic_spec.rb", "spec/spec.opts", "spec/spec_helper.rb"]
+  s.files = ["LICENSE", "README", "TODO", "lib/sequel_polymorphic", "lib/sequel_polymorphic/sequel_polymorphic.rb", "lib/sequel_polymorphic.rb"]
   s.homepage = %q{http://jackndempsey.blogspot.com}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}

@@ -5,7 +5,7 @@ require 'date'
 require 'spec/rake/spectask'
 
 GEM = "sequel_polymorphic"
-GEM_VERSION = "0.0.1"
+GEM_VERSION = "0.0.2"
 AUTHOR = "Jack Dempsey"
 EMAIL = "jack.dempsey@gmail.com"
 HOMEPAGE = "http://jackndempsey.blogspot.com"
@@ -28,7 +28,7 @@ spec = Gem::Specification.new do |s|
   
   s.require_path = 'lib'
   s.autorequire = GEM
-  s.files = %w(LICENSE README Rakefile TODO) + Dir.glob("{lib,spec}/**/*")
+  s.files = %w(LICENSE README TODO) + Dir.glob("lib/**/*")
 end
 
 task :default => :spec
