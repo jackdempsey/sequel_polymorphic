@@ -5,9 +5,9 @@ require 'date'
 require 'spec/rake/spectask'
 
 GEM = "sequel_polymorphic"
-GEM_VERSION = "0.0.2"
-AUTHOR = "Jack Dempsey"
-EMAIL = "jack.dempsey@gmail.com"
+GEM_VERSION = "0.0.3"
+AUTHORS = "Jack Dempsey,Saimon Moore"
+EMAILS = "jack.dempsey@gmail.com,saimonmoore@gmail.com"
 HOMEPAGE = "http://jackndempsey.blogspot.com"
 SUMMARY = "A gem that provides Sequel::Models with polymorphic association capabilities"
 
@@ -19,8 +19,8 @@ spec = Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README", "LICENSE", 'TODO']
   s.summary = SUMMARY
   s.description = s.summary
-  s.author = AUTHOR
-  s.email = EMAIL
+  s.authors = AUTHORS.split(',')
+  s.email = EMAILS.split(',')
   s.homepage = HOMEPAGE
   
   # Uncomment this to add a dependency
