@@ -1,3 +1,5 @@
+Sequel::Model.plugin(SequelPolymorphic)
+
 DB = Sequel.sqlite
  
 class Asset < Sequel::Model
