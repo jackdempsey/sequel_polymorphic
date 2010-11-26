@@ -1,4 +1,5 @@
 Sequel::Model.plugin(SequelPolymorphic)
+Sequel::Model.plugin(:schema)
 
 DB = Sequel.sqlite
  
