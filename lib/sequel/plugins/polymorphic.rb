@@ -9,7 +9,7 @@ module Sequel
       def self.apply(model_class, *arguments, &block)
       end
 
-      def configure(model_class, *arguments, &block)
+      def self.configure(model_class, *arguments, &block)
       end
 
       module ClassMethods
