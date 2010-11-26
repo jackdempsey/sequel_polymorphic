@@ -19,10 +19,10 @@ require File.dirname(__FILE__) + '/../spec_helper'
 #   has_many :assets, :as => :attachable
 # end
 
-describe Sequel::Plugins::Polymorphic do
+describe SequelPolymorphic do
   before do
-    Post.delete_all
-    Asset.delete_all
+    Post.dataset.truncate
+    Asset.dataset.truncate
   end
 
   it "should create an add_asset method which associates an Asset with a Post" do
@@ -52,8 +52,8 @@ describe Sequel::Plugins::Polymorphic do
   
   describe "one_to_many with many associated objects" do
     before do
-      Post.delete_all
-      Asset.delete_all
+      Post.dataset.truncate
+      Asset.dataset.truncate
       @post = Post.create(:name => 'test post')
       @asset1 = Asset.create(:name => "post's first asset")
       @asset2 = Asset.create(:name => "post's second asset")
