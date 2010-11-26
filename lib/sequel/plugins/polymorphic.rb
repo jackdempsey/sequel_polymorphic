@@ -23,9 +23,9 @@ module Sequel
             self.class_eval %{
               associate(:many_to_one, :#{able}, :reciprocal=>:#{plural_model},
                  :dataset=>(proc { klass = #{able}_type.constantize; klass.filter(klass.primary_key=>#{able}_id) }), 
-                 :eager_loader=>(proc do |key_hash, #{plural_model}, associations|
+                 :eager_loader=>(proc do |eo|
                    id_map = {}
-                   #{plural_model}.each do |#{singular_model}| 
+                   eo[:rows].each do |#{singular_model}| 
                      #{singular_model}.associations[:#{able}] = nil; 
                      ((id_map[#{singular_model}.#{able}_type] ||= {})[#{singular_model}.#{able}_id] ||= []) << #{singular_model}
                    end
