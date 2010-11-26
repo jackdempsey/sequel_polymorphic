@@ -19,7 +19,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 #   has_many :assets, :as => :attachable
 # end
 
-describe SequelPolymorphic do
+describe Sequel::Plugins::Polymorphic do
   before do
     Post.dataset.truncate
     Asset.dataset.truncate
