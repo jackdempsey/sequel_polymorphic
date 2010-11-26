@@ -37,9 +37,9 @@ module Sequel
                    end
                  end)
               )
-             
+
               private
-             
+
               def _#{able}=(#{able})
                 self[:#{able}_id] = (#{able}.pk if #{able})
                 self[:#{able}_type] = (#{able}.class.name if #{able})
@@ -49,7 +49,7 @@ module Sequel
             associate(:many_to_one, *args, &block)
           end
         end
-        
+
         alias :belongs_to :many_to_one
 
         def one_to_many(*args, &block)
@@ -63,7 +63,7 @@ module Sequel
 
              method_definitions = %{
                private
-           
+
                def _add_#{many_class}(#{many_class})
                  #{many_class}.#{able}_id = pk
                  #{many_class}.#{able}_type = '#{self}'
@@ -83,9 +83,9 @@ module Sequel
             associate(:one_to_many, *args, &block)
           end
         end
-        
+
         alias :has_many :one_to_many
-        
+
         #example:   many_to_many :tags, :through => :taggings, :as => :taggable
         def many_to_many(*args, &block)
           many_to_class, options = *args # => :tags, :through => :taggings, :as => :taggable
