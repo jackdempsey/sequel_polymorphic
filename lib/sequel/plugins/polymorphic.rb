@@ -57,7 +57,7 @@ module Sequel
           options ||= {}
           many_class = many_of_class.to_s.singularize
           if able = options[:as]
-            associate(:one_to_many, many_of_class, :key=>"#{able}_id".to_sym) do |ds|
+            associate(:one_to_many, many_of_class, :key=>"#{able}_id".to_sym, :reciprocal => nil) do |ds|
               ds.filter("#{able}_type".to_sym => self.class.to_s)
             end
 
