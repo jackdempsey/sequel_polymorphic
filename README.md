@@ -60,4 +60,4 @@ end
 
 ## Sequel (without the polymorphic plugin)
 
-Check the [Advanced Assoocations](http://sequel.rubyforge.org/rdoc/files/doc/advanced_associations_rdoc.html) section of the [Sequel](http://sequel.rubyforge.org) docs (search "Polymorphic Associations")
+Check the [Advanced Associations](http://sequel.rubyforge.org/rdoc/files/doc/advanced_associations_rdoc.html) section of the [Sequel](http://sequel.rubyforge.org) docs (search "Polymorphic Associations")
