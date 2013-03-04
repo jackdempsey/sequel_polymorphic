@@ -9,16 +9,16 @@ A simple plugin for Sequel::Model's that lets you easily create polymorphic asso
 ```ruby
 Sequel::Model.plugin(:polymorphic)
 
+class Asset < Sequel::Model
+  belongs_to :attachable, :polymorphic => true
+end
+
 class Note < Sequel::Model
   has_many :assets, :as => :attachable
 end
 
 class Post < Sequel::Model
   has_many :assets, :as => :attachable
-end
-
-class Asset < Sequel::Model
-  belongs_to :attachable, :polymorphic => true
 end
 ```
 ### Schema
@@ -53,9 +53,6 @@ end
 class Note < ActiveRecord::Base
   has_many :assets, :as => :attachable
 end
-
-@asset.attachable = @post
-@asset.attachable = @note
 ```
 
 ## Sequel (without the polymorphic plugin)
