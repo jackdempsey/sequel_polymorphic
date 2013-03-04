@@ -1,28 +1,31 @@
-Sequel Polymorphic
-==================
+#Sequel Polymorphic
 
 A simple plugin for Sequel::Model's that lets you easily create polymorphic associations.
 
-ActiveRecord Style
-------------------
+##ActiveRecord Style
 
+```ruby
 class Asset < ActiveRecord::Base
- belongs_to :attachable, :polymorphic => true
+  belongs_to :attachable, :polymorphic => true
 end
 
 class Post < ActiveRecord::Base
- has_many :assets, :as => :attachable
+  has_many :assets, :as => :attachable
 end
 
 class Note < ActiveRecord::Base
- has_many :assets, :as => :attachable
+  has_many :assets, :as => :attachable
 end
 
 @asset.attachable = @post
 @asset.attachable = @note
+```
+
+## Sequel (without plugin)
 
 In Sequel you would do the following:
 
+```ruby
 class Asset < Sequel::Model
   many_to_one :attachable, :reciprocal=>:assets, \
     :dataset=>(proc do
@@ -101,10 +104,13 @@ end
 
 @asset.attachable = @post
 @asset.attachable = @note
-
+```
 
 Thats quite a bit of code. With sequel_polymorphic you can now do:
 
+## Polymorphic
+
+```ruby
 class Note < Sequel::Model
   is :polymorphic
   one_to_many :assets, :as => :attachable
@@ -115,4 +121,4 @@ class Asset < Sequel::Model
   many_to_one :attachable, :polymorphic => true
 end
 
-voila!
+```
