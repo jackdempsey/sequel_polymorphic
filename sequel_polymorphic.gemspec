@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.date = %q{2010-11-26}
   s.description = %q{A gem that provides Sequel::Models with polymorphic association capabilities}
   s.email = %q{jack.dempsey@gmail.com saimonmoore@gmail.com}
-  s.extra_rdoc_files = ["README", "LICENSE", "TODO"]
-  s.files = ["LICENSE", "README", "TODO", "lib/sequel_polymorphic.rb", "lib/sequel/plugins/polymorphic.rb"]
+  s.extra_rdoc_files = ["README.md", "LICENSE", "TODO"]
+  s.files = ["LICENSE", "README.md", "TODO", "lib/sequel_polymorphic.rb", "lib/sequel/plugins/polymorphic.rb"]
   s.homepage = %q{http://jackndempsey.blogspot.com}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}
