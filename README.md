@@ -114,12 +114,10 @@ Thats quite a bit of code. With sequel_polymorphic you can now do:
 
 ```ruby
 class Note < Sequel::Model
-  is :polymorphic
   one_to_many :assets, :as => :attachable
 end
 
 class Asset < Sequel::Model
-  is :polymorphic
   many_to_one :attachable, :polymorphic => true
 end
 
