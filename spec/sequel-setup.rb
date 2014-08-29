@@ -1,37 +1,59 @@
 DB = Sequel.sqlite
- 
+Sequel::Model.plugin :schema
+Sequel::Model.plugin :polymorphic
+
 class Asset < Sequel::Model
   set_schema do
     primary_key :id
-    varchar :name
-    integer :attachable_id
-    varchar :attachable_type
+    String  :name
+    Integer :attachable_id
+    String  :attachable_type
   end
-  
-  is :polymorphic
-  belongs_to :attachable, :polymorphic => true
-  
+
+  many_to_one :attachable, :polymorphic => true
 end
+
+
+class Tagging < Sequel::Model
+  set_schema do
+    Integer :taggable_id
+    String  :taggable_type
+    Integer :tag_id
+  end
+
+  many_to_one :taggable, :polymorphic => true
+  many_to_one :tag
+end
+
 
 class Post < Sequel::Model
   set_schema do
     primary_key :id
-    varchar :name
+    String :name
   end
 
-  is :polymorphic
-  has_many :assets, :as => :attachable
+  one_to_many :assets, :as => :attachable
+  many_to_many :tags, :through => :taggings, :as => :taggable
 end
 
 
 class Note < Sequel::Model
   set_schema do
     primary_key :id
-    varchar :name
+    String :name
   end
 
-  is :polymorphic
-  has_many :assets, :as => :attachable
+  one_to_many :assets, :as => :attachable
 end
 
-[Asset, Post, Note].each {|klass| klass.create_table!}
+
+class Tag < Sequel::Model
+  set_schema do
+    primary_key :id
+    String :name
+  end
+end
+
+
+
+[Asset, Post, Note, Tag, Tagging].each {|klass| klass.create_table!}
