@@ -1,0 +1,16 @@
+PATH
+  remote: .
+  specs:
+    sequel_polymorphic (0.0.1)
+      sequel (~> 4.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    sequel (4.13.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  sequel_polymorphic!
