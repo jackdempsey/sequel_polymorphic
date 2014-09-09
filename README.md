@@ -1,7 +1,5 @@
 #Sequel Polymorphic
 
-## Note - This project is no longer maintained. If you use it and would like to take ownership, please let me know.
-
 A simple plugin for Sequel::Model's that lets you easily create polymorphic associations.
 
 ##ActiveRecord Style
