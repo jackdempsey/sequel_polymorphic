@@ -26,4 +26,6 @@ Gem::Specification.new do |s|
     end
   else
   end
+
+  s.add_runtime_dependency 'sequel', '~> 4.0'
 end
