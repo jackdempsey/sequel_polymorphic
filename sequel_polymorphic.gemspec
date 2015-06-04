@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sequel_polymorphic}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.authors = ["Jack Dempsey", "Dave Myron"]
   s.description = %q{A gem that provides Sequel::Models with polymorphic association capabilities}
