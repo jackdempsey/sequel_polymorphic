@@ -1,0 +1,7 @@
+*.lock
+*.tmp
+*.log
+*.gem
+/vendor
+/.bundle
+/rdoc
