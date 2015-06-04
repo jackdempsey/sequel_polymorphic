@@ -14,4 +14,7 @@ Gem::Specification.new do |s|
   s.summary = %q{A gem that provides Sequel::Models with polymorphic association capabilities}
 
   s.add_runtime_dependency 'sequel', '~> 4.0'
+
+  s.add_development_dependency 'rspec', '~> 2.14.1'
+  s.add_development_dependency 'sqlite3', '~> 1.3.10'
 end
