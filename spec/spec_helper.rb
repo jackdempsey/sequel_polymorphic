@@ -7,3 +7,6 @@ require 'sequel'
 
 require File.dirname(__FILE__) + '/../lib/sequel_polymorphic'
 require File.dirname(__FILE__) + '/sequel-setup'
+
+
+
