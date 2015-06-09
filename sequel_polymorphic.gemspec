@@ -1,8 +1,10 @@
 # -*- encoding: utf-8 -*-
 
+require File.expand_path('../lib/sequel_polymorphic/version', __FILE__)
+
 Gem::Specification.new do |s|
   s.name = 'sequel_polymorphic'
-  s.version = '0.1.1'
+  s.version = Sequel::Plugins::Polymorphic.VERSION
   s.required_ruby_version = '>= 1.8.7'
 
   s.description = %q{A gem that provides Sequel::Models with polymorphic association capabilities}
