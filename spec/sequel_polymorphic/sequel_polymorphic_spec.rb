@@ -12,8 +12,11 @@ describe Sequel::Plugins::Polymorphic do
     post = Post.create(:name => 'test post')
     asset = Asset.create(:name => "post's asset")
     post.add_asset(asset)
+    asset.save
+    asset.refresh
     asset.attachable_id.should == post.pk
     asset.attachable_type.should == post.class.to_s
+    asset.attachable.should == post
   end
 
   it "should handle assignment via many_to_one relationship" do

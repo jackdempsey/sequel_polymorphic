@@ -31,7 +31,7 @@ module Sequel
                 able_type = send(:"#{able}_type")
                 able_id = send(:"#{able}_id")
                 return if able_type.nil? || able_id.nil?
-                klass = constantize(able_type)
+                klass = self.class.send(:constantize, able_type.capitalize)
                 klass.where(klass.primary_key => able_id)
               end),
               :eager_loader => (proc do |eo|
@@ -43,7 +43,7 @@ module Sequel
                   ((id_map[model_able_type] ||= {})[model_able_id] ||= []) << model if !model_able_type.nil? && !model_able_id.nil?
                 end
                 id_map.each do |klass_name, id_map|
-                  klass = constantize(klass_name)
+                  klass = constantize(klass_name.capitalize)
                   klass.where(klass.primary_key=>id_map.keys).all do |related_obj|
                     id_map[related_obj.pk].each do |model|
                       model.associations[able] = related_obj
