@@ -17,7 +17,7 @@ module Sequel
           options ||= {}
 
           if options[:polymorphic]
-            model = self.to_s.downcase          # comment
+            model = underscore(self.to_s)       # comment
             plural_model = pluralize(model)     # comments
 
             associate(:many_to_one, able,
@@ -31,7 +31,7 @@ module Sequel
                 able_type = send(:"#{able}_type")
                 able_id = send(:"#{able}_id")
                 return if able_type.nil? || able_id.nil?
-                klass = self.class.send(:constantize, able_type.capitalize)
+                klass = self.class.send(:constantize, able_type)
                 klass.where(klass.primary_key => able_id)
               end),
               :eager_loader => (proc do |eo|
@@ -43,7 +43,7 @@ module Sequel
                   ((id_map[model_able_type] ||= {})[model_able_id] ||= []) << model if !model_able_type.nil? && !model_able_id.nil?
                 end
                 id_map.each do |klass_name, id_map|
-                  klass = constantize(klass_name.capitalize)
+                  klass = constantize(camelize(klass_name))
                   klass.where(klass.primary_key=>id_map.keys).all do |related_obj|
                     id_map[related_obj.pk].each do |model|
                       model.associations[able] = related_obj
@@ -101,7 +101,7 @@ module Sequel
             able_type              = :"#{able}_type"
             collection_singular    = singularize(collection_name.to_s).to_sym # => tag
             collection_singular_id = :"#{collection_singular}_id"
-            through_klass          = constantize(singularize(through.to_s).capitalize) # => Tagging
+            through_klass          = constantize(singularize(camelize(through.to_s))) # => Tagging
 
             associate(:many_to_many, collection_name,
               :left_key   => able_id,
