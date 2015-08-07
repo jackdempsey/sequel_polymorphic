@@ -1,9 +1,15 @@
+# 0.2.2 (2015-08-07)
+
+* Fix errors when non-normalized options given.
+
+  See [#9](https://github.com/jackdempsey/sequel_polymorphic/issues/9)
+  and [#11](https://github.com/jackdempsey/sequel_polymorphic/issues/11).
+
 # 0.2.1 (2015-08-04)
 
 * Fix for many-to-one `left#association` method and eager loader.
 
-  See [#9](https://github.com/jackdempsey/sequel_polymorphic/issues/9)
-  and [#10](https://github.com/jackdempsey/sequel_polymorphic/issues/10).
+  See [#9](https://github.com/jackdempsey/sequel_polymorphic/issues/9).
 
 # 0.2.0 (2015-06-10)
 
