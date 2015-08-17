@@ -13,7 +13,7 @@ describe Sequel::Plugins::Polymorphic do
     describe "#association" do
       it "should return associated object" do
         @post.add_asset(@asset1)
-        @asset1.attachable.should == @post
+        assert_equal @asset1.attachable, @post
       end
     end
 
@@ -22,11 +22,11 @@ describe Sequel::Plugins::Polymorphic do
         @asset1.attachable = @post
         @asset1.save
         @post.refresh
-        @post.assets.should == [@asset1]
+        assert_equal @post.assets, [@asset1]
         @asset2.attachable = @post
         @asset2.save
         @post.refresh
-        @post.assets.should == [@asset1, @asset2]
+        assert_equal @post.assets, [@asset1, @asset2]
       end
     end
 

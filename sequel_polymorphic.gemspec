@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'sequel', '~> 4.0'
 
-  s.add_development_dependency 'rspec', '~> 2.14.1'
+  s.add_development_dependency 'minitest', '~> 5.8'
+  s.add_development_dependency 'minitest-hooks', '~> 1.2'
   s.add_development_dependency 'sqlite3', '~> 1.3.10'
 end

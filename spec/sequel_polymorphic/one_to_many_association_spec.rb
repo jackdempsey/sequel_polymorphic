@@ -13,24 +13,24 @@ describe Sequel::Plugins::Polymorphic do
     describe "#associations" do
       it "should return the list of associated objects" do
         @post.add_asset(@asset1)
-        @post.assets.should == [@asset1]
+        assert_equal @post.assets, [@asset1]
         @post.add_asset(@asset2)
-        @post.assets.should == [@asset1, @asset2]
+        assert_equal @post.assets, [@asset1, @asset2]
       end
     end
 
     describe "#add_association" do
       it "should associate an object" do
         @post.add_asset(@asset1)
-        @post.assets.should == [@asset1]
+        assert_equal @post.assets, [@asset1]
         @post.add_asset(@asset2)
-        @post.assets.should == [@asset1, @asset2]
+        assert_equal @post.assets, [@asset1, @asset2]
       end
 
       it "should associate object with itself" do
         @post.add_asset(@asset1)
         @asset1.refresh
-        @asset1.attachable.should == @post
+        assert_equal @asset1.attachable, @post
       end
     end
 
@@ -39,7 +39,7 @@ describe Sequel::Plugins::Polymorphic do
         @post.add_asset(@asset1)
         @post.add_asset(@asset2)
         @post.remove_asset(@asset1)
-        @post.assets.should == [@asset2]
+        assert_equal @post.assets, [@asset2]
       end
 
       it "should remove itself from associated object" do
@@ -47,7 +47,7 @@ describe Sequel::Plugins::Polymorphic do
         @post.add_asset(@asset2)
         @post.remove_asset(@asset1)
         @asset1.refresh
-        @asset1.attachable.should be_nil
+        assert_nil @asset1.attachable
       end
     end
 
@@ -56,7 +56,7 @@ describe Sequel::Plugins::Polymorphic do
         @post.add_asset(@asset1)
         @post.add_asset(@asset2)
         @post.remove_all_assets
-        @post.assets.should be_empty
+        assert_empty @post.assets
       end
 
       it "should remove itself from all associations" do
@@ -65,7 +65,7 @@ describe Sequel::Plugins::Polymorphic do
         @post.remove_all_assets
         [@asset1, @asset2].each do |asset|
           asset.refresh
-          asset.attachable.should be_nil
+          assert_nil asset.attachable
         end
       end
     end

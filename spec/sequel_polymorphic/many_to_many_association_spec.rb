@@ -14,18 +14,18 @@ describe Sequel::Plugins::Polymorphic do
     describe "#associations" do
       it "should return the list of associated objects" do
         @post.add_tag(@tag1)
-        @post.tags.should == [@tag1]
+        assert_equal @post.tags, [@tag1]
         @post.add_tag(@tag2)
-        @post.tags.should == [@tag1, @tag2]
+        assert_equal @post.tags, [@tag1, @tag2]
       end
     end
 
     describe "#add_association" do
       it "should associate an object" do
         @post.add_tag(@tag1)
-        @post.tags.should == [@tag1]
+        assert_equal @post.tags, [@tag1]
         @post.add_tag(@tag2)
-        @post.tags.should == [@tag1, @tag2]
+        assert_equal @post.tags, [@tag1, @tag2]
       end
     end
 
@@ -34,7 +34,7 @@ describe Sequel::Plugins::Polymorphic do
         @post.add_tag(@tag1)
         @post.add_tag(@tag2)
         @post.remove_tag(@tag1)
-        @post.tags.should == [@tag2]
+        assert_equal @post.tags, [@tag2]
       end
     end
 
@@ -43,7 +43,7 @@ describe Sequel::Plugins::Polymorphic do
         @post.add_tag(@tag1)
         @post.add_tag(@tag2)
         @post.remove_all_tags
-        @post.tags.should be_empty
+        assert_empty @post.tags
       end
     end
 
