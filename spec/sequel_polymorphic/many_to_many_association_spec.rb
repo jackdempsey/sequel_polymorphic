@@ -6,6 +6,7 @@ describe Sequel::Plugins::Polymorphic do
       Post.dataset.delete
       Tagging.dataset.delete
       Tag.dataset.delete
+
       @post = Post.create(:name => 'test post')
       @tag1 = Tag.create(:name => "post's first tag")
       @tag2 = Tag.create(:name => "post's second tag")
@@ -15,6 +16,7 @@ describe Sequel::Plugins::Polymorphic do
       it "should return the list of associated objects" do
         @post.add_tag(@tag1)
         assert_equal @post.tags, [@tag1]
+
         @post.add_tag(@tag2)
         assert_equal @post.tags, [@tag1, @tag2]
       end
@@ -24,6 +26,7 @@ describe Sequel::Plugins::Polymorphic do
       it "should associate an object" do
         @post.add_tag(@tag1)
         assert_equal @post.tags, [@tag1]
+
         @post.add_tag(@tag2)
         assert_equal @post.tags, [@tag1, @tag2]
       end
@@ -48,7 +51,7 @@ describe Sequel::Plugins::Polymorphic do
     end
 
     # TODO: add tests for standard #many_to_many association fallback
-  end
-end
+  end # "many-to-many association"
+end # Sequel::Plugins::Polymorphic
 
 

@@ -1,5 +1,3 @@
-# -*- encoding: utf-8 -*-
-
 require File.expand_path('../lib/sequel_polymorphic/version', __FILE__)
 
 Gem::Specification.new do |s|
@@ -22,6 +20,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'minitest', '~> 5.8'
   s.add_development_dependency 'minitest-hooks', '~> 1.2'
-  s.add_development_dependency 'sqlite3', '~> 1.3.10'
+  s.add_development_dependency 'sqlite3', '~> 1.3'
   s.add_development_dependency 'simplecov', '~> 0.10'
 end

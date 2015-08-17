@@ -5,6 +5,7 @@ describe Sequel::Plugins::Polymorphic do
     before do
       Post.dataset.delete
       Asset.dataset.delete
+
       @post = Post.create(:name => 'test post')
       @asset1 = Asset.create(:name => "post's first asset")
       @asset2 = Asset.create(:name => "post's second asset")
@@ -14,6 +15,7 @@ describe Sequel::Plugins::Polymorphic do
       it "should return the list of associated objects" do
         @post.add_asset(@asset1)
         assert_equal @post.assets, [@asset1]
+
         @post.add_asset(@asset2)
         assert_equal @post.assets, [@asset1, @asset2]
       end
@@ -23,6 +25,7 @@ describe Sequel::Plugins::Polymorphic do
       it "should associate an object" do
         @post.add_asset(@asset1)
         assert_equal @post.assets, [@asset1]
+
         @post.add_asset(@asset2)
         assert_equal @post.assets, [@asset1, @asset2]
       end
@@ -73,7 +76,7 @@ describe Sequel::Plugins::Polymorphic do
     # TODO: add tests for standard #many_to_many association fallback
 
     # TODO: add #has_many alias test
-  end
-end
+  end # "one-to-many association"
+end # Sequel::Plugins::Polymorphic
 
 

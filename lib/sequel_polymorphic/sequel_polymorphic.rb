@@ -1,7 +1,6 @@
 module Sequel
   module Plugins
     module Polymorphic
-      # Apply the plugin to the model.
       def self.apply(model, options = {})
       end
 
@@ -11,14 +10,15 @@ module Sequel
 
       module ClassMethods
 
-        # Example: Comment.many_to_one :commentable, polymorphic: true
+        # Creates a many-to-one relationship.
+        # Example: Comment.many_to_one :commentable, :polymorphic => true
         def many_to_one(*args, &block)
           able, options = *args
           options ||= {}
 
           if options[:polymorphic]
-            model = underscore(self.to_s)       # comment
-            plural_model = pluralize(model)     # comments
+            model = underscore(self.to_s)
+            plural_model = pluralize(model)
 
             associate(:many_to_one, able,
               :reciprocal => plural_model.to_sym,
@@ -61,8 +61,9 @@ module Sequel
         alias :belongs_to :many_to_one
 
 
-        # Creates a one-to-many relationship. NB: Removing/clearing nullifies the *able fields in the related objects
-        # Example: Post.one_to_many :comments, as: :commentable
+        # Creates a one-to-many relationship.
+        # Note: Removing/clearing nullifies the *able fields in the related objects.
+        # Example: Post.one_to_many :awesome_comments, :as => :commentable
         def one_to_many(*args, &block)
           collection_name, options = *args
           options ||= {}
@@ -90,7 +91,8 @@ module Sequel
         alias :has_many :one_to_many
 
 
-        # Creates a many-to-many relationship. NB: Removing/clearing the collection deletes the instances in the through relationship (as opposed to nullifying the *able fields as in the one-to-many)
+        # Creates a many-to-many relationship.
+        # Note: Removing/clearing the collection deletes the instances in the through relationship (as opposed to nullifying the *able fields as in the one-to-many).
         # Example: Post.many_to_many :tags, :through => :taggings, :as => :taggable
         def many_to_many(*args, &block)
           collection_name, options = *args
@@ -99,9 +101,9 @@ module Sequel
           if through = (options[:through] || options[:join_table]) and able = options[:as]
             able_id                = :"#{able}_id"
             able_type              = :"#{able}_type"
-            collection_singular    = singularize(collection_name.to_s).to_sym # => tag
+            collection_singular    = singularize(collection_name.to_s).to_sym
             collection_singular_id = :"#{collection_singular}_id"
-            through_klass          = constantize(singularize(camelize(through.to_s))) # => Tagging
+            through_klass          = constantize(singularize(camelize(through.to_s)))
 
             associate(:many_to_many, collection_name,
               :left_key   => able_id,

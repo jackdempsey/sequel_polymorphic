@@ -5,6 +5,7 @@ describe Sequel::Plugins::Polymorphic do
     before do
       Post.dataset.delete
       Asset.dataset.delete
+
       @post = Post.create(:name => 'test post')
       @asset1 = Asset.create(:name => "post's first asset")
       @asset2 = Asset.create(:name => "post's second asset")
@@ -23,6 +24,7 @@ describe Sequel::Plugins::Polymorphic do
         @asset1.save
         @post.refresh
         assert_equal @post.assets, [@asset1]
+
         @asset2.attachable = @post
         @asset2.save
         @post.refresh
@@ -35,7 +37,7 @@ describe Sequel::Plugins::Polymorphic do
     # TODO: add tests for standard #many_to_one association fallback
 
     # TODO: add #belongs_to alias test
-  end
-end
+  end # "many-to-one association"
+end # Sequel::Plugins::Polymorphic
 
 
