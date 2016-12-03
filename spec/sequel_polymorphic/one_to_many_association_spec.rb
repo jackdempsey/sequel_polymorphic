@@ -9,6 +9,8 @@ describe Sequel::Plugins::Polymorphic do
       @post = Post.create(:name => 'test post')
       @asset1 = Asset.create(:name => "post's first asset")
       @asset2 = Asset.create(:name => "post's second asset")
+
+      @nested_asset = Nested::Asset.create(:name => "nested assset")
     end
 
     describe "#associations" do
@@ -18,6 +20,13 @@ describe Sequel::Plugins::Polymorphic do
 
         @post.add_asset(@asset2)
         assert_equal @post.assets, [@asset1, @asset2]
+      end
+
+      describe "association with class name" do
+        it "should return the list of associated objects" do
+          @post.add_nested_asset(@nested_asset)
+          assert_equal @post.nested_assets, [@nested_asset]
+        end
       end
     end
 

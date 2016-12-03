@@ -14,6 +14,20 @@ class Asset < Sequel::Model
 end
 
 
+module Nested
+  class Asset < Sequel::Model
+    set_schema do
+      primary_key :id
+      String  :name
+      Integer :attachable_id
+      String  :attachable_type
+    end
+
+    many_to_one :attachable, :polymorphic => true
+  end
+end
+
+
 class Tagging < Sequel::Model
   set_schema do
     Integer :taggable_id
@@ -33,6 +47,7 @@ class Post < Sequel::Model
   end
 
   one_to_many :assets, :as => :attachable
+  one_to_many :nested_assets, :as => :attachable, class: Nested::Asset
   many_to_many :tags, :through => :taggings, :as => :taggable
 end
 
@@ -56,4 +71,4 @@ end
 
 
 
-[Asset, Post, Note, Tag, Tagging].each {|klass| klass.create_table!}
+[Asset, Nested::Asset, Post, Note, Tag, Tagging].each {|klass| klass.create_table!}
