@@ -72,12 +72,14 @@ module Sequel
             able_id           = :"#{able}_id"
             able_type         = :"#{able}_type"
             many_dataset_name = :"#{collection_name}_dataset"
+            klass             = options[:class]
 
             associate(:one_to_many, collection_name,
               :key        => able_id,
               :reciprocal => able,
               :reciprocal_type => :one_to_many,
               :conditions => {able_type => self.to_s},
+              :class      => klass,
               :adder      => proc { |many_of_instance| many_of_instance.update(able_id => pk, able_type => self.class.to_s) },
               :remover    => proc { |many_of_instance| many_of_instance.update(able_id => nil, able_type => nil) },
               :clearer    => proc { send(many_dataset_name).update(able_id => nil, able_type => nil) }
