@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'minitest-hooks', '~> 1.2'
   s.add_development_dependency 'sqlite3', '~> 1.3'
   s.add_development_dependency 'simplecov', '~> 0.10'
+  s.add_development_dependency 'rake', '~> 11.3'
 end
