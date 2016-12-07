@@ -20,7 +20,7 @@ module Sequel
             model = underscore(self.to_s)
             plural_model = pluralize(model)
 
-            associate(:many_to_one, able,
+            association_options = {
               :reciprocal => plural_model.to_sym,
               :reciprocal_type => :many_to_one,
               :setter => (proc do |able_instance|
@@ -51,8 +51,8 @@ module Sequel
                   end
                 end
               end)
-            )
-
+            }.merge(options)
+            associate(:many_to_one, able, association_options)
           else
             associate(:many_to_one, *args, &block)
           end
@@ -72,7 +72,6 @@ module Sequel
             able_id           = :"#{able}_id"
             able_type         = :"#{able}_type"
             many_dataset_name = :"#{collection_name}_dataset"
-            klass             = options[:class]
 
             association_options = {
               :key        => able_id,
@@ -82,8 +81,7 @@ module Sequel
               :adder      => proc { |many_of_instance| many_of_instance.update(able_id => pk, able_type => self.class.to_s) },
               :remover    => proc { |many_of_instance| many_of_instance.update(able_id => nil, able_type => nil) },
               :clearer    => proc { send(many_dataset_name).update(able_id => nil, able_type => nil) }
-            }
-            association_options[:class] = klass if klass
+            }.merge(options)
             associate(:one_to_many, collection_name, association_options)
           else
             associate(:one_to_many, *args, &block)
@@ -107,14 +105,15 @@ module Sequel
             collection_singular_id = :"#{collection_singular}_id"
             through_klass          = constantize(singularize(camelize(through.to_s)))
 
-            associate(:many_to_many, collection_name,
+            association_options = {
               :left_key   => able_id,
               :join_table => through,
               :conditions => {able_type => self.to_s},
               :adder      => proc { |many_of_instance| through_klass.create(collection_singular_id => many_of_instance.pk, able_id => pk, able_type => self.class.to_s) },
               :remover    => proc { |many_of_instance| through_klass.where(collection_singular_id => many_of_instance.pk, able_id => pk, able_type => self.class.to_s).delete },
               :clearer    => proc { through_klass.where(able_id => pk, able_type => self.class.to_s).delete }
-            )
+            }.merge(options)
+            associate(:many_to_many, collection_name, association_options)
 
           else
             associate(:many_to_many, *args, &block)
