@@ -1,6 +1,8 @@
 module Sequel
   module Plugins
     module Polymorphic
+      # TODO: make everything really Sequel-way!
+
       def self.apply(model, options = {})
       end
 

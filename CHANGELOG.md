@@ -1,3 +1,21 @@
+# 0.3.0 (2016-12-12) 0.3.0
+
+* **Feature**: *add one-to-one polymorphic associations support*.
+
+* **Feature**: *relax Sequel version dependency to any 4.x version*.
+
+* **Feature**: *all unrecognised options are passed to underlying methods now*.
+
+  For instance you can set an association class with `one_to_many :nested_assets, :as => :attachable, :class => Nested::Asset`.
+
+* **Enhancements**: many code improvements:
+
+  * Use [Minitest](https://github.com/seattlerb/minitest) instead of [RSpec](http://rspec.info/) for unit testing.
+  * Add code coverage (via [SimpleCov](https://github.com/colszowka/simplecov)).
+  * Add [Rake](https://github.com/ruby/rake) as a dependency (though it has been already used).
+  * Code improvements.
+  * Tests improvements.
+
 # 0.2.2 (2015-08-07)
 
 * **Fix**: *errors if model's or through model's class name is CamelCased*.
