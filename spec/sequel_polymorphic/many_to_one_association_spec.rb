@@ -16,6 +16,8 @@ describe Sequel::Plugins::Polymorphic do
         @post.add_asset(@asset1)
         assert_equal @asset1.attachable, @post
       end
+
+      # TODO: add tests of merging options
     end
 
     describe "#association=" do

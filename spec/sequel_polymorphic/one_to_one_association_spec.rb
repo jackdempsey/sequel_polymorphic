@@ -16,6 +16,8 @@ describe Sequel::Plugins::Polymorphic do
         assert_equal @post.postable, @question
         assert_equal @question.post, @post
       end
+
+      # TODO: add tests of merging options
     end
 
     describe "#association=" do

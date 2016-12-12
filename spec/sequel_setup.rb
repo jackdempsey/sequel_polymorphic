@@ -49,7 +49,7 @@ class Post < Sequel::Model
   end
 
   one_to_many :assets, :as => :attachable
-  one_to_many :nested_assets, :as => :attachable, class: Nested::Asset
+  one_to_many :nested_assets, :as => :attachable, :class => Nested::Asset
   many_to_many :tags, :through => :taggings, :as => :taggable
   many_to_one :postable, :polymorphic => true
 end

@@ -20,6 +20,8 @@ describe Sequel::Plugins::Polymorphic do
         @post.add_tag(@tag2)
         assert_equal @post.tags, [@tag1, @tag2]
       end
+
+      # TODO: add tests of merging options
     end
 
     describe "#add_association" do
