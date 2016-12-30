@@ -54,7 +54,7 @@ module Sequel
                 end
               end)
             }.merge(options)
-            associate(:many_to_one, able, association_options)
+            associate(:many_to_one, able, association_options, &block)
           else
             associate(:many_to_one, *args, &block)
           end
@@ -84,7 +84,7 @@ module Sequel
               :remover    => proc { |many_of_instance| many_of_instance.update(able_id => nil, able_type => nil) },
               :clearer    => proc { send(many_dataset_name).update(able_id => nil, able_type => nil) }
             }.merge(options)
-            associate(:one_to_many, collection_name, association_options)
+            associate(:one_to_many, collection_name, association_options, &block)
           else
             associate(:one_to_many, *args, &block)
           end
@@ -115,7 +115,7 @@ module Sequel
               :remover    => proc { |many_of_instance| through_klass.where(collection_singular_id => many_of_instance.pk, able_id => pk, able_type => self.class.to_s).delete },
               :clearer    => proc { through_klass.where(able_id => pk, able_type => self.class.to_s).delete }
             }.merge(options)
-            associate(:many_to_many, collection_name, association_options)
+            associate(:many_to_many, collection_name, association_options, &block)
 
           else
             associate(:many_to_many, *args, &block)
@@ -144,7 +144,7 @@ module Sequel
               :remover    => proc { |many_of_instance| many_of_instance.update(able_id => nil, able_type => nil) },
               :clearer    => proc { send(many_dataset_name).update(able_id => nil, able_type => nil) }
             }.merge(options)
-            associate(:one_to_one, collection_name, association_options)
+            associate(:one_to_one, collection_name, association_options, &block)
           else
             associate(:one_to_one, *args, &block)
           end
