@@ -1,3 +1,10 @@
+# 0.3.1 (2017-01-05) 0.3.1
+
+* **Fix**: *blocks are not passed to `associate`*.
+
+    See [#21](https://github.com/jackdempsey/sequel_polymorphic/pull/21).
+    Thanks to [@shioyama](https://github.com/shioyama).
+
 # 0.3.0 (2016-12-12) 0.3.0
 
 * **Feature**: *add one-to-one polymorphic associations support*.
