@@ -45,3 +45,15 @@ end
 ### More usage examples
 
 See [specs](https://github.com/jackdempsey/sequel_polymorphic/tree/master/spec).
+
+## Important note
+
+See [here](https://github.com/jackdempsey/sequel_polymorphic/issues/20).
+
+## Feedback and contribute
+
+<https://github.com/jackdempsey/sequel_polymorphic>
+
+## License
+
+MIT
