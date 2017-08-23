@@ -1,4 +1,4 @@
-require File.expand_path('../lib/sequel_polymorphic/version', __FILE__)
+require File.expand_path('../lib/sequel/plugins/polymorphic/version', __FILE__)
 
 Gem::Specification.new do |s|
   s.name = 'sequel_polymorphic'
@@ -11,12 +11,12 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/jackdempsey/sequel_polymorphic'
   s.license = 'MIT'
   s.email = ['jack.dempsey@gmail.com', 'therealdave.myron@gmail.com', 'kuraga333@mail.ru']
-  s.files = ['README.md', 'LICENSE', 'CHANGELOG.md', 'lib/sequel_polymorphic.rb',
-    'lib/sequel_polymorphic/version.rb', 'lib/sequel_polymorphic/sequel_polymorphic.rb']
+  s.files = ['README.md', 'LICENSE', 'CHANGELOG.md', 'lib/sequel/plugins/polymorphic.rb',
+    'lib/sequel/plugins/polymorphic/version.rb', 'lib/sequel/plugins/polymorphic.rb']
   s.require_paths = ['lib']
   s.extra_rdoc_files = ['README.md', 'LICENSE', 'CHANGELOG.md']
 
-  s.add_runtime_dependency 'sequel', '~> 4'
+  s.add_runtime_dependency 'sequel', '>=4.0.0', '<6'
 
   s.add_development_dependency 'minitest', '~> 5.8'
   s.add_development_dependency 'minitest-hooks', '~> 1.2'

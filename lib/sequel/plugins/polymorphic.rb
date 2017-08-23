@@ -10,6 +10,26 @@ module Sequel
 
       end
 
+      module DatasetMethods
+        def where(*cond, &block)
+          if cond.first.is_a? Hash
+            cond.first.clone.each do |key, value|
+              # Does it respnd to #pk ? Then it's a model
+              next unless value.respond_to?("pk")
+              next unless self.model.association_reflections.key?(key.to_sym)
+              next unless self.model.association_reflections[key.to_sym].key?(:polymorphic)
+              next unless self.model.association_reflections[key.to_sym][:polymorphic]
+
+              cond.first.delete(key)
+              cond.first["#{key}_id".to_sym] = value.pk
+              cond.first["#{key}_type".to_sym] = value.class.to_s
+            end
+          end
+
+          super
+        end
+      end
+
       module ClassMethods
 
         # Creates a many-to-one relationship.
@@ -140,9 +160,10 @@ module Sequel
               :reciprocal => able,
               :reciprocal_type => :one_to_one,
               :conditions => {able_type => self.to_s},
-              :adder      => proc { |many_of_instance| many_of_instance.update(able_id => pk, able_type => self.class.to_s) },
-              :remover    => proc { |many_of_instance| many_of_instance.update(able_id => nil, able_type => nil) },
-              :clearer    => proc { send(many_dataset_name).update(able_id => nil, able_type => nil) }
+              :setter => (proc do |able_instance|
+                self[:"#{able}_id"]   = (able_instance.pk if able_instance)
+                self[:"#{able}_type"] = (able_instance.class.name if able_instance)
+              end)
             }.merge(options)
             associate(:one_to_one, collection_name, association_options, &block)
           else
@@ -156,5 +177,3 @@ module Sequel
     end # Polymorphic
   end # Plugins
 end # Sequel
-
-

@@ -9,7 +9,5 @@ SimpleCov.start do
 end
 require 'minitest/autorun'
 
-require File.dirname(__FILE__) + '/../lib/sequel_polymorphic'
+require File.dirname(__FILE__) + '/../lib/sequel/plugins/polymorphic'
 require File.dirname(__FILE__) + '/sequel_setup'
-
-

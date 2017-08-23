@@ -1,11 +1,38 @@
-# 0.3.1 (2017-01-05) 0.3.1
+# 0.4.0 (2017-10-25)
+
+* **Enhancements**: *migrate to new Sequel's plugins tree schema.*
+
+  This step is required for Sequel 5 compatibility.
+
+  See [#27](https://github.com/jackdempsey/sequel_polymorphic/pull/27).
+  Thanks to [@jnylen](https://github.com/jnylen).
+
+* **Enhancements**: *get rid of `schema` Sequel's plugin*.
+
+  This step is required for Sequel 5 compatibility.
+
+  See [#23](https://github.com/jackdempsey/sequel_polymorphic/pull/23).
+  Thanks to [@jnylen](https://github.com/jnylen).
+
+* **Fix**: *`one_to_one` association tries to add an adder, remover and clearer methods*.
+
+  It's not correct and generates an error in Sequel 5.
+
+  See [#26](https://github.com/jackdempsey/sequel_polymorphic/pull/26).
+  Thanks to [@jnylen](https://github.com/jnylen).
+
+* **Feature**: *make this gem compatible with Sequel 5.x.x versions*.
+
+  See previous changes in this version.
+
+# 0.3.1 (2017-01-05)
 
 * **Fix**: *blocks are not passed to `associate`*.
 
-    See [#21](https://github.com/jackdempsey/sequel_polymorphic/pull/21).
-    Thanks to [@shioyama](https://github.com/shioyama).
+  See [#21](https://github.com/jackdempsey/sequel_polymorphic/pull/21).
+  Thanks to [@shioyama](https://github.com/shioyama).
 
-# 0.3.0 (2016-12-12) 0.3.0
+# 0.3.0 (2016-12-12)
 
 * **Feature**: *add one-to-one polymorphic associations support*.
 

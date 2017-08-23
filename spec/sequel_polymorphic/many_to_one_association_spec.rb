@@ -34,6 +34,40 @@ describe Sequel::Plugins::Polymorphic do
       end
     end
 
+    describe "#where" do
+      it "should return items with a specific model using find" do
+        @asset1.attachable = @post
+        @asset1.save
+        @post.refresh
+
+        assert_equal Asset.find(attachable: @post), @asset1
+      end
+
+      it "should return items with a specific model using where" do
+        @asset1.attachable = @post
+        @asset1.save
+        @post.refresh
+
+        assert_equal Asset.where(attachable: @post).first, @asset1
+      end
+
+      it "should return items with a specific model using where and non-polymorphic" do
+        @tag = Tag.create(:name => "Test")
+        @tagging = Tagging.create(:taggable => @post, :tag => @tag)
+
+        assert_equal Tagging.where(tag: @tag).first, @tagging
+      end
+
+      it "should return items with a specific model using find and non-polymorphic" do
+        @tag = Tag.create(:name => "Test")
+        @tagging = Tagging.create(:taggable => @post, :tag => @tag)
+
+        assert_equal Tagging.find(tag: @tag), @tagging
+      end
+
+      # TODO: add tests for standard #where fallback
+    end
+
     # TODO: add eager loader tests
 
     # TODO: add tests for standard #many_to_one association fallback
@@ -41,5 +75,3 @@ describe Sequel::Plugins::Polymorphic do
     # TODO: add #belongs_to alias test
   end # "many-to-one association"
 end # Sequel::Plugins::Polymorphic
-
-

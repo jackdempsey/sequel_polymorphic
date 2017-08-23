@@ -1,8 +1,13 @@
 # Sequel Polymorphic
 
-A simple plugin for [Sequel](http://sequel.jeremyevans.net) that lets you easily create polymorphic associations.
+A plugin for [Sequel](http://sequel.jeremyevans.net) that lets you easily create polymorphic associations.
 
-Version 4.x is required.
+Required:
+
+* Sequel >= 4.0.0 and Ruby >= 1.8.7,
+* or Sequel >= 5.0.0 and Ruby >= 1.9.2.
+
+(Note: Ruby 1.8.7 option is not tested.)
 
 ## Usage examples
 
