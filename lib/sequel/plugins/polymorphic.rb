@@ -25,10 +25,7 @@ module Sequel
               cond.first["#{key}_type".to_sym] = value.class.to_s
             end
           end
-
-          puts cond.inspect
-
-          #add_filter(:where, cond, &block)
+          
           super
         end
       end
