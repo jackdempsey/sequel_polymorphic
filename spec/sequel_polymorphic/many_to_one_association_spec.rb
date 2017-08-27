@@ -40,8 +40,6 @@ describe Sequel::Plugins::Polymorphic do
         @asset1.save
         @post.refresh
 
-        @returns =
-
         assert_equal Asset.find(attachable: @post), @asset1
       end
     end
