@@ -34,6 +34,18 @@ describe Sequel::Plugins::Polymorphic do
       end
     end
 
+    describe "#where=" do
+      it "should return items with a specific model" do
+        @asset1.attachable = @post
+        @asset1.save
+        @post.refresh
+
+        @returns =
+
+        assert_equal Asset.find(attachable: @post), @asset1
+      end
+    end
+
     # TODO: add eager loader tests
 
     # TODO: add tests for standard #many_to_one association fallback
@@ -41,5 +53,3 @@ describe Sequel::Plugins::Polymorphic do
     # TODO: add #belongs_to alias test
   end # "many-to-one association"
 end # Sequel::Plugins::Polymorphic
-
-
