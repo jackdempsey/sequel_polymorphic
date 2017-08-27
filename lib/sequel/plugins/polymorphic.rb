@@ -21,11 +21,14 @@ module Sequel
               next unless self.model.association_reflections[key.to_sym][:polymorphic]
 
               cond.first.delete(key)
-              cond.first["#{key}_id"] = value.pk
-              cond.first["#{key}_type"] = value.class.to_s
+              cond.first["#{key}_id".to_sym] = value.pk
+              cond.first["#{key}_type".to_sym] = value.class.to_s
             end
           end
 
+          puts cond.inspect
+
+          #add_filter(:where, cond, &block)
           super
         end
       end
