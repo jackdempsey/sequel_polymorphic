@@ -25,7 +25,7 @@ module Sequel
               cond.first["#{key}_type".to_sym] = value.class.to_s
             end
           end
-          
+
           super
         end
       end
