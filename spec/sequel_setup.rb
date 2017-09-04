@@ -32,7 +32,7 @@ DB.create_table!(:tags) do
 end
 
 DB.create_table!(:questions) do
-primary_key :id
+  primary_key :id
 end
 
 class Asset < Sequel::Model
@@ -67,7 +67,6 @@ end
 
 
 class Tag < Sequel::Model
-
 end
 
 
