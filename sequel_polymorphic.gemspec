@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/jackdempsey/sequel_polymorphic'
   s.license = 'MIT'
   s.email = ['jack.dempsey@gmail.com', 'therealdave.myron@gmail.com', 'kuraga333@mail.ru']
-  s.files = ['README.md', 'LICENSE', 'CHANGELOG.md', 'lib/sequel_polymorphic.rb',
-    'lib/sequel_polymorphic/version.rb', 'lib/sequel_polymorphic/sequel_polymorphic.rb']
+  s.files = ['README.md', 'LICENSE', 'CHANGELOG.md', 'lib/sequel/plugins/polymorphic.rb',
+    'lib/sequel/plugins/polymorphic/version.rb', 'lib/sequel/plugins/polymorphic.rb']
   s.require_paths = ['lib']
   s.extra_rdoc_files = ['README.md', 'LICENSE', 'CHANGELOG.md']
 
