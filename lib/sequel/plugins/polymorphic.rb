@@ -139,7 +139,11 @@ module Sequel
               :key        => able_id,
               :reciprocal => able,
               :reciprocal_type => :one_to_one,
-              :conditions => {able_type => self.to_s}
+              :conditions => {able_type => self.to_s},
+              :setter => (proc do |able_instance|
+                self[:"#{able}_id"]   = (able_instance.pk if able_instance)
+                self[:"#{able}_type"] = (able_instance.class.name if able_instance)
+              end)
             }.merge(options)
             associate(:one_to_one, collection_name, association_options, &block)
           else

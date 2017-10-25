@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.extra_rdoc_files = ['README.md', 'LICENSE', 'CHANGELOG.md']
 
-  s.add_runtime_dependency 'sequel', '~> 4'
+  s.add_runtime_dependency 'sequel', '>=4.0.0', '<6'
 
   s.add_development_dependency 'minitest', '~> 5.8'
   s.add_development_dependency 'minitest-hooks', '~> 1.2'
