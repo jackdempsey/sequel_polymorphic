@@ -52,8 +52,33 @@ describe Sequel::Plugins::Polymorphic do
       end
     end
 
+    describe "#where=" do
+      it "should return items with a specific model using find" do
+        @tag3 = Tag.create(:name => "Test2")
+        @tagging3 = Tagging.create(:taggable => @post, :tag => @tag3)
+
+        assert_equal Tagging.find(taggable: @post, tag: @tag3), @tagging3
+      end
+
+      it "should return items with a specific model using where" do
+        @tag3 = Tag.create(:name => "Test2")
+        @tagging3 = Tagging.create(:taggable => @post, :tag => @tag3)
+
+        assert_equal Tagging.where(taggable: @post, tag: @tag3).first.tag, @tag3
+      end
+
+      it "should return items with a specific model using where and non-polymorphic" do
+        @tagging = Tagging.first
+
+        assert_equal Tagging.where(tag: @tag1).first, @tagging
+      end
+
+      it "should return items with a specific model using find and non-polymorphic" do
+        @tagging = Tagging.first
+        assert_equal Tagging.find(tag: @tag1), @tagging
+      end
+    end
+
     # TODO: add tests for standard #many_to_many association fallback
   end # "many-to-many association"
 end # Sequel::Plugins::Polymorphic
-
-

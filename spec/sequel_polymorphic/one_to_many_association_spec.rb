@@ -82,10 +82,31 @@ describe Sequel::Plugins::Polymorphic do
       end
     end
 
+    describe "#where=" do
+      it "should return items with a specific model using find" do
+        @post.add_asset(@asset1)
+        assert_equal Asset.find(attachable: @post), @asset1
+      end
+
+      it "should return items with a specific model using where" do
+        @post.add_asset(@asset1)
+        @post.add_asset(@asset2)
+        assert_equal Asset.where(attachable: @post).all, [@asset1, @asset2]
+      end
+
+      it "should return items with a specific model using find (nested)" do
+        @post.add_nested_asset(@nested_asset)
+        assert_equal Nested::Asset.find(attachable: @post), @nested_asset
+      end
+
+      it "should return items with a specific model using where (nested)" do
+        @post.add_nested_asset(@nested_asset)
+        assert_equal Nested::Asset.where(attachable: @post).all, [@nested_asset]
+      end
+    end
+
     # TODO: add tests for standard #many_to_many association fallback
 
     # TODO: add #has_many alias test
   end # "one-to-many association"
 end # Sequel::Plugins::Polymorphic
-
-

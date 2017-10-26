@@ -29,6 +29,20 @@ describe Sequel::Plugins::Polymorphic do
       end
     end
 
+    describe "#where=" do
+      it "should return items with a specific model using find" do
+        @post.postable = @question
+        @post.save
+        assert_equal Post.find(postable: @question), @post
+      end
+
+      it "should return items with a specific model using where" do
+        @post.postable = @question
+        @post.save
+        assert_equal Post.where(postable: @question).all, [@post]
+      end
+    end
+
     # TODO: add tests for standard #one_to_one association fallback
 
     # TODO: add #has_one alias test
