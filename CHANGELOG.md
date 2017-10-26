@@ -16,7 +16,7 @@
 
 * **Fix**: *`one_to_one` association tries to add an adder, remover and clearer methods*.
 
-  It's not correct and dues to an error in Sequel 5.
+  It's not correct and creates an error in Sequel 5.
 
   See [#26](https://github.com/jackdempsey/sequel_polymorphic/pull/26).
   Thanks to [@jnylen](https://github.com/jnylen).
