@@ -12,7 +12,7 @@ describe Sequel::Plugins::Polymorphic do
 
     describe "#association" do
       it "should return associated object" do
-        @question.add_post(@post)
+        @question.post = @post
         assert_equal @post.postable, @question
         assert_equal @question.post, @post
       end

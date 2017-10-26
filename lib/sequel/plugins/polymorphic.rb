@@ -160,9 +160,10 @@ module Sequel
               :reciprocal => able,
               :reciprocal_type => :one_to_one,
               :conditions => {able_type => self.to_s},
-              :adder      => proc { |many_of_instance| many_of_instance.update(able_id => pk, able_type => self.class.to_s) },
-              :remover    => proc { |many_of_instance| many_of_instance.update(able_id => nil, able_type => nil) },
-              :clearer    => proc { send(many_dataset_name).update(able_id => nil, able_type => nil) }
+              :setter => (proc do |able_instance|
+                self[:"#{able}_id"]   = (able_instance.pk if able_instance)
+                self[:"#{able}_type"] = (able_instance.class.name if able_instance)
+              end)
             }.merge(options)
             associate(:one_to_one, collection_name, association_options, &block)
           else

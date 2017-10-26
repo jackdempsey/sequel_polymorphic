@@ -2,7 +2,7 @@
 
 A simple plugin for [Sequel](http://sequel.jeremyevans.net) that lets you easily create polymorphic associations.
 
-Version 4.x is required.
+Version 4.x.x or 5.x.x of Sequel is required.
 
 ## Usage examples
 
