@@ -1,3 +1,10 @@
+# 0.5.0 (2018-10-23)
+
+* **Feature**: *add `#where` functionality.*
+
+  See [#25](https://github.com/jackdempsey/sequel_polymorphic/pull/25).
+  Thanks to [@jnylen](https://github.com/jnylen).
+
 # 0.4.0 (2017-10-25)
 
 * **Enhancements**: *migrate to new Sequel's plugins tree schema.*
