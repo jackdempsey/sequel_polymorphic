@@ -1,4 +1,4 @@
-# Sequel Polymorphic
+# Sequel Polymorphic (unmaintained)
 
 A plugin for [Sequel](http://sequel.jeremyevans.net) that lets you easily create polymorphic associations.
 
